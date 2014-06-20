@@ -3,15 +3,13 @@ var utils = require('util');
 var EventEmitter = require('events').EventEmitter;
 
 var Scanner = function () {
-
     EventEmitter.call(this);
-
-
-    return this;
-    
+    console.log("created");
 }
+utils.inherits(Scanner, EventEmitter);
 
 Scanner.prototype.connectTo = function (uuid) {
+  console.log("connectto");
     noble.on('discover', function (peripheral) {
         if (peripheral.id === uuid) {
             // we need to connect before reading
@@ -37,13 +35,11 @@ Scanner.prototype.connectTo = function (uuid) {
 
     console.log('Start scanning...');
     noble.startScanning([]); // XXX filtering the uuid doesn't seem to work
-
 } 
 
 Scanner.prototype.disconnect = function (uuid) {
 }
 
-utils.inherits(Scanner, EventEmitter);
 
 
 
